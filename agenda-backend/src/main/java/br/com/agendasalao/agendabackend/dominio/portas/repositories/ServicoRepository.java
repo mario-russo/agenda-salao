@@ -9,5 +9,5 @@ public interface ServicoRepository {
 
     public Servico getById(Long id);
 
-    public void salvar(Servico servico);
+    public Servico salvar(Servico servico);
 }

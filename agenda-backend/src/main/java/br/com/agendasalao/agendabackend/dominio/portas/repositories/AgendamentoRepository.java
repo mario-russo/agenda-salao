@@ -8,6 +8,10 @@ public interface AgendamentoRepository {
     public List<Agendamento> getAll();
 
     public Agendamento getById(Long id);
-
-    public void salvar(Agendamento agendamento);
+ /**
+  *   Retorna o agendamento salvo 
+  * @param agendamento
+  * @return Agendaento
+  */
+    public Agendamento salvar(Agendamento agendamento);
 }
