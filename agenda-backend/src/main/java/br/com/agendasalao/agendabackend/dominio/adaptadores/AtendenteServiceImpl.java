@@ -1,6 +1,7 @@
 package br.com.agendasalao.agendabackend.dominio.adaptadores;
 
 import java.util.List;
+import java.util.Objects;
 
 import br.com.agendasalao.agendabackend.dominio.Atendente;
 import br.com.agendasalao.agendabackend.dominio.interfaces.AtendenteService;
@@ -16,8 +17,8 @@ public class AtendenteServiceImpl implements AtendenteService {
     @Override
     public String salvaAtendente(Atendente atendente) {
         var atendenteSalvo = atendenteRepository.Salve(atendente);
-        if (atendenteSalvo.getId() == null)
-            return "Erro ao salvar";
+        if (Objects.isNull(atendenteSalvo) )
+            return "ERRO AO SALVAR";
         return "ATENDENTE SALVO COM SUCESSO";
     }
 
