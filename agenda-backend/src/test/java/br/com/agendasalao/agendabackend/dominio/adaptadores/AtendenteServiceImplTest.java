@@ -32,28 +32,34 @@ public class AtendenteServiceImplTest {
 
     @Test
     void testBuscaTodosAtendente() {
-        atendente = new Atendente("mario", "mario@mario", "1234");
 
+        // Montagem do Cenário
+        atendente = new Atendente("mario", "mario@mario", "1234");
         when(atendenteRepository.getAll()).thenReturn(List.of(atendente));
 
+        // chamada da função do para vericicar
         List<Atendente> resposta = service.buscaTodosAtendente();
 
+        // verifica os acertos da classe
         verify(atendenteRepository).getAll();
         assertNotNull(resposta);
         assertEquals(1, resposta.size());
         assertEquals(Atendente.class, resposta.get(0).getClass());
- 
+
     }
 
     @Test
     void testSalvaAtendente() {
+
+        // Montagem do Cenário
         atendente = new Atendente("mario", "mario@mario", "1234");
         when(atendenteRepository.Salve(any())).thenReturn(atendente);
 
+        // chamada da função do para vericicar
         String resposta = service.salvaAtendente(atendente);
 
+        // verifica os acertos da classe
         verify(atendenteRepository).Salve(atendente);
-
         assertEquals("ATENDENTE SALVO COM SUCESSO", resposta);
         assertEquals(String.class, resposta.getClass());
 
@@ -62,13 +68,14 @@ public class AtendenteServiceImplTest {
     @Test
     @DisplayName("verifica se o o Id do cliente é gerado!")
     void testSalvaAtendenteErro() {
-
+        // Montagem do Cenário
         when(atendenteRepository.Salve(any())).thenReturn(null);
-
+        
+        // chamada da função do para vericicar
         String resposta = service.salvaAtendente(atendente);
 
+        // verifica os acertos da classe
         verify(atendenteRepository).Salve(atendente);
-
         assertEquals("ERRO AO SALVAR", resposta);
         assertEquals(String.class, resposta.getClass());
 
