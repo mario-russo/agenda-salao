@@ -1,11 +1,15 @@
 package br.com.agendasalao.agendabackend.dominio.adaptadores;
 
 import java.util.List;
+import java.util.Objects;
+
+import org.springframework.stereotype.Service;
 
 import br.com.agendasalao.agendabackend.dominio.Cliente;
 import br.com.agendasalao.agendabackend.dominio.interfaces.ClienteSevice;
 import br.com.agendasalao.agendabackend.dominio.portas.repositories.ClienteRepository;
 
+@Service
 public class ClienteServiceImpl implements ClienteSevice {
     private final ClienteRepository clienteRepository;
 
@@ -18,8 +22,8 @@ public class ClienteServiceImpl implements ClienteSevice {
 
         Cliente clienteSalvo = clienteRepository.salvar(cliente);
 
-        if (clienteSalvo.getId() == null)
-            return "erro ao salvar o cliente";
+        if (Objects.isNull(clienteSalvo))
+            return "ERRO AO SALVAR O CLIENTE";
 
         return "CLIENTE SALVO COM SUCESSO";
     }
