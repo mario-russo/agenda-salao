@@ -1,6 +1,7 @@
 package br.com.agendasalao.agendabackend.dominio.adaptadores;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class ClienteServiceImplTest {
 
     @Test
     void testBuscaTodosClientes() {
-        
+
         // Montagem do Cenário
         cliente = new Cliente("mario", "mario@email", "21998463887");
         when(repository.getAll()).thenReturn(List.of(cliente));
@@ -36,6 +37,7 @@ public class ClienteServiceImplTest {
         List<Cliente> reposta = service.buscaTodosClientes();
 
         // verifica os acertos da classe
+        assertNotNull(reposta);
         assertEquals(1, reposta.size());
         assertEquals(Cliente.class, reposta.get(0).getClass());
     }
