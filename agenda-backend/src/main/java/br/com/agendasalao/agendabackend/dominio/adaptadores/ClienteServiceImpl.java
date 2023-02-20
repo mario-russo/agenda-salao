@@ -5,8 +5,8 @@ import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
-import br.com.agendasalao.agendabackend.dominio.Cliente;
 import br.com.agendasalao.agendabackend.dominio.interfaces.ClienteSevice;
+import br.com.agendasalao.agendabackend.dominio.model.Cliente;
 import br.com.agendasalao.agendabackend.dominio.portas.repositories.ClienteRepository;
 
 @Service

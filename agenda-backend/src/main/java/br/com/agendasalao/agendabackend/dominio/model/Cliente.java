@@ -1,4 +1,6 @@
-package br.com.agendasalao.agendabackend.dominio;
+package br.com.agendasalao.agendabackend.dominio.model;
+
+import br.com.agendasalao.agendabackend.infra.adaptadores.entidades.ClienteEntity;
 
 public class Cliente {
     private Long id;
@@ -10,6 +12,12 @@ public class Cliente {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
+    }
+    
+    public Cliente(ClienteEntity entity) {
+        this.nome = entity.getNome();
+        this.email = entity.getEmail();
+        this.telefone = entity.getTelefone();
     }
 
     public Long getId() {

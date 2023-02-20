@@ -1,4 +1,6 @@
-package br.com.agendasalao.agendabackend.dominio;
+package br.com.agendasalao.agendabackend.dominio.model;
+
+import br.com.agendasalao.agendabackend.infra.adaptadores.entidades.ServicoEntity;
 
 public class Servico {
     private Long id;
@@ -9,6 +11,15 @@ public class Servico {
         this.nome = nome;
         this.preco = preco;
     }
+
+    
+
+    public Servico(ServicoEntity entity) {
+        this.nome = entity.getNome();
+        this.preco = entity.getPreco();
+    }
+
+
 
     public String getNome() {
         return nome;

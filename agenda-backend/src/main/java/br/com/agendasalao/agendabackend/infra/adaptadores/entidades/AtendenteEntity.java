@@ -2,9 +2,10 @@ package br.com.agendasalao.agendabackend.infra.adaptadores.entidades;
 
 import javax.persistence.*;
 
-import br.com.agendasalao.agendabackend.dominio.Atendente;
+import br.com.agendasalao.agendabackend.dominio.model.Atendente;
 
 @Entity
+@Table(name = "atendente")
 public class AtendenteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

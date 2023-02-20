@@ -13,7 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import br.com.agendasalao.agendabackend.dominio.Cliente;
+import br.com.agendasalao.agendabackend.dominio.model.Cliente;
 import br.com.agendasalao.agendabackend.dominio.portas.repositories.ClienteRepository;
 
 public class ClienteServiceImplTest {

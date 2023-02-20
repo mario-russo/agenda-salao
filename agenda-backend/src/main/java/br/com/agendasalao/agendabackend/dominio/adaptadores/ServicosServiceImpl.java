@@ -2,10 +2,12 @@ package br.com.agendasalao.agendabackend.dominio.adaptadores;
 
 import java.util.List;
 
-import br.com.agendasalao.agendabackend.dominio.Servico;
-import br.com.agendasalao.agendabackend.dominio.interfaces.ServicosService;
-import br.com.agendasalao.agendabackend.dominio.portas.repositories.ServicoRepository;
+import org.springframework.stereotype.Service;
 
+import br.com.agendasalao.agendabackend.dominio.interfaces.ServicosService;
+import br.com.agendasalao.agendabackend.dominio.model.Servico;
+import br.com.agendasalao.agendabackend.dominio.portas.repositories.ServicoRepository;
+@Service
 public class ServicosServiceImpl implements ServicosService {
     private final ServicoRepository repository;
 

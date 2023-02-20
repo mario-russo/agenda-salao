@@ -1,16 +1,21 @@
 package br.com.agendasalao.agendabackend.infra.adaptadores.entidades;
 
+import java.util.List;
+
 import javax.persistence.*;
 
-import br.com.agendasalao.agendabackend.dominio.Servico;
+import br.com.agendasalao.agendabackend.dominio.model.Servico;
 
 @Entity
+@Table(name = "servicos")
 public class ServicoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
     private Long preco;
+    @ManyToMany(mappedBy="servico", cascade = CascadeType.ALL)
+    private List<AgendamentoEntity >agendamento;
 
     public ServicoEntity(Servico servico) {
         this.nome = servico.getNome();

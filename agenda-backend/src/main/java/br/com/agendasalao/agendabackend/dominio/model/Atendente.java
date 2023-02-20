@@ -1,4 +1,6 @@
-package br.com.agendasalao.agendabackend.dominio;
+package br.com.agendasalao.agendabackend.dominio.model;
+
+import br.com.agendasalao.agendabackend.infra.adaptadores.entidades.AtendenteEntity;
 
 public class Atendente {
     private Long id;
@@ -11,6 +13,16 @@ public class Atendente {
         this.email = email;
         this.senha = senha;
     }
+
+    
+
+    public Atendente(AtendenteEntity atendenteEntity) {
+        this.nome = atendenteEntity.getNome();
+        this.email = atendenteEntity.getEmail();
+        this.senha = atendenteEntity.getSenha();
+    }
+
+
 
     public Long getId() {
         return id;

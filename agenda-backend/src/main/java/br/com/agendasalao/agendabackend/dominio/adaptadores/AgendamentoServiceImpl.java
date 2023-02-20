@@ -2,10 +2,12 @@ package br.com.agendasalao.agendabackend.dominio.adaptadores;
 
 import java.util.List;
 
-import br.com.agendasalao.agendabackend.dominio.Agendamento;
-import br.com.agendasalao.agendabackend.dominio.interfaces.AgendamentoService;
-import br.com.agendasalao.agendabackend.dominio.portas.repositories.AgendamentoRepository;
+import org.springframework.stereotype.Service;
 
+import br.com.agendasalao.agendabackend.dominio.interfaces.AgendamentoService;
+import br.com.agendasalao.agendabackend.dominio.model.Agendamento;
+import br.com.agendasalao.agendabackend.dominio.portas.repositories.AgendamentoRepository;
+@Service
 public class AgendamentoServiceImpl implements AgendamentoService {
     private final AgendamentoRepository agendamentoRepository;
 

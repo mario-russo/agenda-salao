@@ -3,10 +3,12 @@ package br.com.agendasalao.agendabackend.dominio.adaptadores;
 import java.util.List;
 import java.util.Objects;
 
-import br.com.agendasalao.agendabackend.dominio.Atendente;
-import br.com.agendasalao.agendabackend.dominio.interfaces.AtendenteService;
-import br.com.agendasalao.agendabackend.dominio.portas.repositories.AtendenteRepository;
+import org.springframework.stereotype.Service;
 
+import br.com.agendasalao.agendabackend.dominio.interfaces.AtendenteService;
+import br.com.agendasalao.agendabackend.dominio.model.Atendente;
+import br.com.agendasalao.agendabackend.dominio.portas.repositories.AtendenteRepository;
+@Service
 public class AtendenteServiceImpl implements AtendenteService {
     private final AtendenteRepository atendenteRepository;
 

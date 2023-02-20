@@ -17,7 +17,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import br.com.agendasalao.agendabackend.dominio.Atendente;
+import br.com.agendasalao.agendabackend.dominio.model.Atendente;
 import br.com.agendasalao.agendabackend.dominio.portas.repositories.AtendenteRepository;
 
 @ExtendWith(MockitoExtension.class)

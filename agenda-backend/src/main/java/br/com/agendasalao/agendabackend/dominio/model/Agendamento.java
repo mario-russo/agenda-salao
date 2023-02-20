@@ -1,4 +1,6 @@
-package br.com.agendasalao.agendabackend.dominio;
+package br.com.agendasalao.agendabackend.dominio.model;
+
+import br.com.agendasalao.agendabackend.infra.adaptadores.entidades.AgendamentoEntity;
 
 public class Agendamento {
     private Long id;
@@ -18,6 +20,14 @@ public class Agendamento {
         this.atendente = atendente;
         this.endereco = endereco;
     }
+    
+
+    public Agendamento(AgendamentoEntity agendamentoEntity) {
+        this.data = agendamentoEntity.getData();
+        this.hora = agendamentoEntity.getHora();
+        this.endereco = agendamentoEntity.getEndereco();
+    }
+
 
     public Long getId() {
         return id;

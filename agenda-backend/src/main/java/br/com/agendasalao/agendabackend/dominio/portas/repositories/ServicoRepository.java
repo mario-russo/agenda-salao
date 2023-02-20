@@ -2,7 +2,7 @@ package br.com.agendasalao.agendabackend.dominio.portas.repositories;
 
 import java.util.List;
 
-import br.com.agendasalao.agendabackend.dominio.Servico;
+import br.com.agendasalao.agendabackend.dominio.model.Servico;
 
 public interface ServicoRepository {
     public List<Servico> getAll();
