@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.agendasalao.agendabackend.dominio.interfaces.ServicosService;
-import br.com.agendasalao.agendabackend.dominio.model.Cliente;
 import br.com.agendasalao.agendabackend.dominio.model.Servico;
 
 @RestController

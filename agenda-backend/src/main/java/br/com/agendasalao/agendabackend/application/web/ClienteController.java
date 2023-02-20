@@ -33,4 +33,8 @@ public class ClienteController {
     public List<Cliente> listAll(){
         return service.buscaTodosClientes();
     }
+    @GetMapping("/{id}")
+    public Cliente getById(long id){
+        return null;
+    }
 }
