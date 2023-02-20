@@ -1,7 +1,6 @@
 package br.com.agendasalao.agendabackend.dominio.adaptadores;
 
 import java.util.List;
-import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ public class ClienteServiceImpl implements ClienteSevice {
 
         Cliente clienteSalvo = clienteRepository.salvar(cliente);
 
-        if (Objects.isNull(clienteSalvo))
+        if (clienteSalvo.getId() == null)
             return "ERRO AO SALVAR O CLIENTE";
 
         return "CLIENTE SALVO COM SUCESSO";
@@ -30,7 +29,8 @@ public class ClienteServiceImpl implements ClienteSevice {
 
     @Override
     public List<Cliente> buscaTodosClientes() {
-        return clienteRepository.getAll();
+        var entity =  clienteRepository.getAll();
+        return  entity;
     }
 
 }

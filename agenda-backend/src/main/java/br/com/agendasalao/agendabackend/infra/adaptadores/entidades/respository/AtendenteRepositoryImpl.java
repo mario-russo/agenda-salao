@@ -35,7 +35,8 @@ public class AtendenteRepositoryImpl implements AtendenteRepository {
     @Override
     public Atendente Salve(Atendente atendente) {
         var entity = new AtendenteEntity(atendente);
-        return new Atendente(entity);
+        var entitySalva = repository.save(entity);
+        return new Atendente(entitySalva);
     }
     
 }
