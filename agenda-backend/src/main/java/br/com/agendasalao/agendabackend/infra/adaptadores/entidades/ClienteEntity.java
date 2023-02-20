@@ -1,6 +1,6 @@
 package br.com.agendasalao.agendabackend.infra.adaptadores.entidades;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import br.com.agendasalao.agendabackend.dominio.model.Cliente;
 

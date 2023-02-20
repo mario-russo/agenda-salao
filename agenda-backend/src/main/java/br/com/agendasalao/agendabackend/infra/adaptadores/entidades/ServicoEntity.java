@@ -2,7 +2,7 @@ package br.com.agendasalao.agendabackend.infra.adaptadores.entidades;
 
 import java.util.List;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import br.com.agendasalao.agendabackend.dominio.model.Servico;
 
