@@ -10,7 +10,7 @@ import br.com.agendasalao.agendabackend.dominio.model.Agendamento;
 @Table(name = "agendamento")
 public class AgendamentoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String data;
     private String hora;
@@ -31,6 +31,9 @@ public class AgendamentoEntity {
         this.data = agendamento.getData();
         this.hora = agendamento.getHora();
         this.endereco = agendamento.getEndereco();
+    }
+    
+    public AgendamentoEntity() {
     }
 
     public Long getId() {

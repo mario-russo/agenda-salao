@@ -3,16 +3,20 @@ package br.com.agendasalao.agendabackend.infra.adaptadores.entidades.respository
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import br.com.agendasalao.agendabackend.dominio.model.Servico;
 import br.com.agendasalao.agendabackend.dominio.portas.repositories.ServicoRepository;
 import br.com.agendasalao.agendabackend.infra.adaptadores.entidades.ServicoEntity;
 import br.com.agendasalao.agendabackend.infra.adaptadores.entidades.respository.jpa.ServicoJpaRepository;
 
-@Repository
+@Component
 public class ServicoRepositoryImpl implements ServicoRepository{
-    private ServicoJpaRepository repository;
+    private final  ServicoJpaRepository repository;
+
+    public ServicoRepositoryImpl(ServicoJpaRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public List<Servico> getAll() {

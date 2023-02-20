@@ -30,7 +30,6 @@ public class ClienteServiceImpl implements ClienteSevice {
 
     @Override
     public List<Cliente> buscaTodosClientes() {
-
         return clienteRepository.getAll();
     }
 

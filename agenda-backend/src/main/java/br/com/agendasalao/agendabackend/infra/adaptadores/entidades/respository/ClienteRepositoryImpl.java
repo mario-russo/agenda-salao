@@ -3,14 +3,14 @@ package br.com.agendasalao.agendabackend.infra.adaptadores.entidades.respository
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import br.com.agendasalao.agendabackend.dominio.model.Cliente;
 import br.com.agendasalao.agendabackend.dominio.portas.repositories.ClienteRepository;
 import br.com.agendasalao.agendabackend.infra.adaptadores.entidades.ClienteEntity;
 import br.com.agendasalao.agendabackend.infra.adaptadores.entidades.respository.jpa.ClienteJpaRepository;
 
-@Repository
+@Component
 public class ClienteRepositoryImpl implements ClienteRepository{
     private final ClienteJpaRepository repository;
     

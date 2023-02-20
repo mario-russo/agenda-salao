@@ -8,7 +8,7 @@ import br.com.agendasalao.agendabackend.dominio.model.Cliente;
 @Table(name = "cliente")
 public class ClienteEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
@@ -18,6 +18,9 @@ public class ClienteEntity {
         this.nome = cliente.getNome();
         this.email = cliente.getEmail();
         this.telefone = cliente.getTelefone();
+    }
+    
+    public ClienteEntity() {
     }
 
     public Long getId() {

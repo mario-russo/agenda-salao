@@ -10,7 +10,7 @@ import br.com.agendasalao.agendabackend.dominio.model.Servico;
 @Table(name = "servicos")
 public class ServicoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private Long preco;
@@ -20,6 +20,9 @@ public class ServicoEntity {
     public ServicoEntity(Servico servico) {
         this.nome = servico.getNome();
         this.preco = servico.getPreco();
+    }
+    
+    public ServicoEntity() {
     }
 
     public Long getId() {

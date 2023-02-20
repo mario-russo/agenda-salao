@@ -12,14 +12,14 @@ public class Servico {
         this.preco = preco;
     }
 
-    
-
     public Servico(ServicoEntity entity) {
+        this.id = entity.getId();
         this.nome = entity.getNome();
         this.preco = entity.getPreco();
     }
 
-
+    public Servico() {
+    }
 
     public String getNome() {
         return nome;
