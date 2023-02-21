@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive,onMounted } from "vue";
 import createAgendamento from "../components/ModalInputAgendamento.vue";
+
+import configAxios from "../axios/configAxios"
 
 const columns = [
   {
@@ -151,7 +153,17 @@ const rows = [
     iron: "6%",
   },
 ];
+
+async function axios () {
+ const resul = await configAxios.get("/agendamento")
+ console.log(resul.data)
+}
+
 const toolbar = ref(false);
+
+onMounted(() => {
+  axios()
+})
 </script>
 <template>
   <div class="container">
