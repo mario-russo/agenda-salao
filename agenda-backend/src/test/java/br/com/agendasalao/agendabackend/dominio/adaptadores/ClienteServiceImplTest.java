@@ -15,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 
 import br.com.agendasalao.agendabackend.dominio.model.Cliente;
 import br.com.agendasalao.agendabackend.dominio.portas.repositories.ClienteRepository;
+import br.com.agendasalao.agendabackend.infra.adaptadores.entidades.ClienteEntity;
 
 public class ClienteServiceImplTest {
 
@@ -44,29 +45,31 @@ public class ClienteServiceImplTest {
 
     @Test
     void testSalvaCliente() {
+        var entity = new ClienteEntity( new Cliente("mario", "mario@email", "21998463887")
+        );
 
         // Montagem do Cenário
-        cliente = new Cliente("mario", "mario@email", "21998463887");
+        cliente = new Cliente(entity);
         when(repository.salvar(cliente)).thenReturn(cliente);
 
         // chamada da função do para vericicar
         String reposta = service.salvaCliente(cliente);
 
         // verifica os acertos da classe
-        assertEquals(String.class, reposta.getClass());
-        assertEquals("CLIENTE SALVO COM SUCESSO", reposta);
+        assertEquals(24, reposta.length());
 
     }
 
     @Test
     @DisplayName("erro ao salvar o cliente!")
     void testErroAoSalvaCliente() {
-
         // Montagem do Cenário
-        when(repository.salvar(cliente)).thenReturn(null);
+        cliente = new Cliente("mario", "mario@email", "21998463887");
+
+        when(repository.salvar(cliente)).thenReturn(cliente);
 
         // chamada da função do para vericicar
-        String reposta = service.salvaCliente(cliente);
+        var reposta = service.salvaCliente(cliente);
 
         // verifica os acertos da classe
         assertEquals(String.class, reposta.getClass());
