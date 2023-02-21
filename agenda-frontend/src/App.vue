@@ -39,7 +39,7 @@ function toggleLeftDrawer() {
 
 .btn {
   position: absolute;
-  top: 20px;
-  right: 10%;
+  top: 15px;
+  right: 7%;
 }
 </style>
