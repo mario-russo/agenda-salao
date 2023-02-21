@@ -14,6 +14,12 @@ const routes = [
         path: '/agendamento',
         name: 'Agendamento',
         component: ()=> import ('../pages/Agenda.vue')
+    },
+    {
+        icon:"bussines",
+        path: '/servicos',
+        name: 'Servicos',
+        component: ()=> import ('../pages/Servicos.vue')
     }
 
 ]
