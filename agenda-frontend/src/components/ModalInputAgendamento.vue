@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
+import configAxios from "../axios/configAxios";
+import {Agendamento}from "../domain/Agendamento"
 
 type agendamento = {
   cliente?: string;
@@ -11,7 +13,11 @@ type agendamento = {
 };
 const ph = ref("");
 const dense = ref(true);
-const dados = reactive<agendamento>({});
+const dados = reactive<Agendamento>({atendente:'mario',cliente:'',data:'',hora:'',servico:'',endereco:''});
+
+async function createAgendamento(){
+  await configAxios.post('/agendamento' , dados)
+}
 </script>
 
 <template>
@@ -87,10 +93,11 @@ const dados = reactive<agendamento>({});
     <div>
       <q-btn-group spread>
         <q-btn color="purple" label="" icon="cancel" />
-        <q-btn color="purple" label="" icon="send" />
+        <q-btn color="purple" label="" icon="send" @click="createAgendamento()"/>
       </q-btn-group>
     </div>
   </div>
+  {{ dados }}
 </template>
 <style scoped>
 .filho {
