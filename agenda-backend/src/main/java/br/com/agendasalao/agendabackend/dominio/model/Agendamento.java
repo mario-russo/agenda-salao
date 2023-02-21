@@ -28,6 +28,10 @@ public class Agendamento {
         this.hora = agendamentoEntity.getHora();
         this.endereco = agendamentoEntity.getEndereco();
     }
+     
+
+    public Agendamento() {
+    }
 
 
     public Long getId() {

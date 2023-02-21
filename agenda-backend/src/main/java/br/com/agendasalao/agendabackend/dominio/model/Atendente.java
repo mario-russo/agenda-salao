@@ -14,8 +14,6 @@ public class Atendente {
         this.senha = senha;
     }
 
-    
-
     public Atendente(AtendenteEntity atendenteEntity) {
         this.id = atendenteEntity.getId();
         this.nome = atendenteEntity.getNome();
@@ -23,7 +21,8 @@ public class Atendente {
         this.senha = atendenteEntity.getSenha();
     }
 
-
+    public Atendente() {
+    }
 
     public Long getId() {
         return id;

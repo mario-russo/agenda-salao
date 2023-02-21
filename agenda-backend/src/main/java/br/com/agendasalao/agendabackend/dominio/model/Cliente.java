@@ -20,6 +20,10 @@ public class Cliente {
         this.email = entity.getEmail();
         this.telefone = entity.getTelefone();
     }
+    
+
+    public Cliente() {
+    }
 
     public Long getId() {
         return id;
