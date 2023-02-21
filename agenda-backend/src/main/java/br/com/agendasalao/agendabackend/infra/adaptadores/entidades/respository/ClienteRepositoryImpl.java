@@ -34,7 +34,8 @@ public class ClienteRepositoryImpl implements ClienteRepository{
     @Override
     public Cliente salvar(Cliente cliente) {
         var entity = new ClienteEntity(cliente);
-        return new Cliente(entity);
+        var entitySalva = repository.save(entity);
+        return new Cliente(entitySalva);
     }
     
 }

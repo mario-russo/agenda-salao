@@ -20,8 +20,10 @@ public class ServicoRepositoryImpl implements ServicoRepository{
 
     @Override
     public List<Servico> getAll() {
+        
         var entity = repository.findAll();
         var servicos = entity.stream().map(item -> new Servico(item)).collect(Collectors.toList());
+
         return servicos;
     }
 
