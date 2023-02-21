@@ -23,6 +23,7 @@ public class Agendamento {
     
 
     public Agendamento(AgendamentoEntity agendamentoEntity) {
+        this.id = agendamentoEntity.getId();
         this.data = agendamentoEntity.getData();
         this.hora = agendamentoEntity.getHora();
         this.endereco = agendamentoEntity.getEndereco();

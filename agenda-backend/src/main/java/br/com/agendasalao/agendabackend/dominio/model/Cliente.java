@@ -15,6 +15,7 @@ public class Cliente {
     }
     
     public Cliente(ClienteEntity entity) {
+        this.id = entity.getId();
         this.nome = entity.getNome();
         this.email = entity.getEmail();
         this.telefone = entity.getTelefone();

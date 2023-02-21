@@ -17,6 +17,7 @@ public class Atendente {
     
 
     public Atendente(AtendenteEntity atendenteEntity) {
+        this.id = atendenteEntity.getId();
         this.nome = atendenteEntity.getNome();
         this.email = atendenteEntity.getEmail();
         this.senha = atendenteEntity.getSenha();
