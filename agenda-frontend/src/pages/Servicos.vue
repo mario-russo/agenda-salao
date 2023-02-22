@@ -28,12 +28,10 @@ const columns = [
   {
     name: "editar",
     label: "editar",
-   
   },
   {
     name: "excluir",
     label: "Excluir",
-   
   },
 ];
 
@@ -46,55 +44,54 @@ async function axios() {
 
 const toolbar = ref(false);
 
-
 onMounted(() => {
   axios();
 });
 </script>
 <template>
-    <div class="container">
-      <div class="filho">
-        <div>
-          <q-table :rows="rows" :columns="columns" row-key="name" color="amber">
-            <template v-slot:top>
-              <h5>Lista de Agendamento</h5>
-              <q-space />
-              <q-btn
-                class="btn"
-                round
-                color="positive"
-                size="md"
-                icon="add"
-                @click="toolbar = true"
-              />
-            </template>
-          </q-table>
-        </div>  
-      </div>
+  <div class="container">
+    <div class="filho">
       <div>
-        <q-dialog  full-height v-model="toolbar">
-          <q-card style="width: 1000px; max-width: 80vw;">
-            <q-toolbar>
-              <q-avatar>
-                <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
-              </q-avatar>
-  
-              <q-toolbar-title
-                ><span class="text-weight-bold">Agendamento</span>
-                Insira os dados para um novo agendamento</q-toolbar-title
-              >
-  
-              <q-btn flat round dense icon="close" v-close-popup />
-            </q-toolbar>
-  
-            <q-card-section>
-              <createServicos></createServicos>
-            </q-card-section>
-          </q-card>
-        </q-dialog>
+        <q-table :rows="rows" :columns="columns" row-key="name" color="amber">
+          <template v-slot:top>
+            <h5>Lista de Serviços</h5>
+            <q-space />
+            <q-btn
+              class="btn"
+              round
+              color="positive"
+              size="md"
+              icon="add"
+              @click="toolbar = true"
+            />
+          </template>
+        </q-table>
       </div>
     </div>
-  </template>
+    <div>
+      <q-dialog full-height v-model="toolbar">
+        <q-card style="width: 1000px; max-width: 80vw">
+          <q-toolbar>
+            <q-avatar>
+              <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
+            </q-avatar>
+
+            <q-toolbar-title
+              ><span class="text-weight-bold">Serviços</span> Insira os dados
+              para um novos Serviços</q-toolbar-title
+            >
+
+            <q-btn flat round dense icon="close" v-close-popup />
+          </q-toolbar>
+
+          <q-card-section>
+            <createServicos></createServicos>
+          </q-card-section>
+        </q-card>
+      </q-dialog>
+    </div>
+  </div>
+</template>
 <style scoped>
 .container {
   width: 100%;

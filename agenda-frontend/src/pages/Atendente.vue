@@ -52,7 +52,7 @@ onMounted(() => {
       <div>
         <q-table :rows="rows" :columns="columns" row-key="name" color="amber">
           <template v-slot:top>
-            <h5>Lista de Agendamento</h5>
+            <h5>Lista de Atendente</h5>
             <q-space />
             <q-btn
               class="btn"
@@ -75,8 +75,8 @@ onMounted(() => {
             </q-avatar>
 
             <q-toolbar-title
-              ><span class="text-weight-bold">Agendamento</span>
-              Insira os dados para um novo agendamento</q-toolbar-title
+              ><span class="text-weight-bold">Atendente</span>
+              Insira os dados para um novo Atendente</q-toolbar-title
             >
 
             <q-btn flat round dense icon="close" v-close-popup />

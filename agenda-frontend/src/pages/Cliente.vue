@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, reactive,onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import createCliente from "../components/modalInputCliente.vue";
-import {Agendamento} from "../domain/Agendamento"
+import { Agendamento } from "../domain/Agendamento";
 
-import configAxios from "../axios/configAxios"
+import configAxios from "../axios/configAxios";
 
 const columns = [
   {
@@ -12,46 +12,41 @@ const columns = [
     label: "Cliente",
     align: "left",
     field: "nome",
-   
   },
   {
     name: "E-mail",
     align: "center",
     label: "Serviço",
     field: "email",
-    
   },
   {
     name: "Telefone",
     label: "Data ",
     field: "telefone",
-   
   },
- 
+
   {
     name: "editar",
     label: "editar",
-   
   },
   {
     name: "excluir",
     label: "Excluir",
-   
   },
 ];
 
 const rows = ref<Agendamento[]>([]);
 
-async function axios () {
- const resul = await configAxios.get("/cliente")
-  rows.value = resul.data
+async function axios() {
+  const resul = await configAxios.get("/cliente");
+  rows.value = resul.data;
 }
 
 const toolbar = ref(false);
 
 onMounted(() => {
-  axios()
-})
+  axios();
+});
 </script>
 <template>
   <div class="container">
@@ -59,7 +54,7 @@ onMounted(() => {
       <div>
         <q-table :rows="rows" :columns="columns" row-key="name" color="amber">
           <template v-slot:top>
-            <h5>Lista de Agendamento</h5>
+            <h5>Lista de Clientes</h5>
             <q-space />
             <q-btn
               class="btn"
@@ -71,19 +66,19 @@ onMounted(() => {
             />
           </template>
         </q-table>
-      </div>  
+      </div>
     </div>
     <div>
-      <q-dialog  full-height v-model="toolbar">
-        <q-card style="width: 1000px; max-width: 80vw;">
+      <q-dialog full-height v-model="toolbar">
+        <q-card style="width: 1000px; max-width: 80vw">
           <q-toolbar>
             <q-avatar>
               <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
             </q-avatar>
 
             <q-toolbar-title
-              ><span class="text-weight-bold">Agendamento</span>
-              Insira os dados para um novo agendamento</q-toolbar-title
+              ><span class="text-weight-bold">Clientes</span> Insira os dados
+              para um novops Clientes</q-toolbar-title
             >
 
             <q-btn flat round dense icon="close" v-close-popup />
