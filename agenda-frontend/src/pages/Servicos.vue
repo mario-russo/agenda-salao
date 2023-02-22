@@ -25,6 +25,16 @@ const columns = [
     label: "preco ",
     field: "preco",
   },
+  {
+    name: "editar",
+    label: "editar",
+   
+  },
+  {
+    name: "excluir",
+    label: "Excluir",
+   
+  },
 ];
 
 const rows = ref([]);
