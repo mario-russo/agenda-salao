@@ -8,27 +8,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.agendasalao.agendabackend.dominio.interfaces.AgendamentoService;
-import br.com.agendasalao.agendabackend.dominio.model.Agendamento;
+import br.com.agendasalao.agendabackend.dominio.interfaces.AtendenteService;
+import br.com.agendasalao.agendabackend.dominio.model.Atendente;
 
 @RestController
 @RequestMapping("/atendente")
 public class AtendenteController {
-    private final AgendamentoService service;
+    private final AtendenteService service;
 
-    public AtendenteController(AgendamentoService service) {
+    public AtendenteController(AtendenteService service) {
         this.service = service;
     }
     
     @GetMapping
     public 
-    List<Agendamento> listAll(){
-       return service.buscaTodosAgendamentos();
+    List<Atendente> listAll(){
+       return service.buscaTodosAtendente();
     }
 
     @PostMapping
-    public String create(@RequestBody Agendamento agendamento){
-        var result = service.salvarAgendamento(agendamento);
+    public String create(@RequestBody Atendente agendamento){
+        var result = service.salvaAtendente(agendamento);
         return result;
     }
     
