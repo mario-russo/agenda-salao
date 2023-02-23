@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
 import createServicos from "../components/ModalInputServicos.vue";
-// import {Agendamento} from "../domain/Agendamento"
+import { QSpinnerGears, QTableProps, useQuasar } from "quasar"
 
 import configAxios from "../axios/configAxios";
 import { Servico } from "../domain/Servico";
-
-const columns = [
+const q = useQuasar()
+const columns:QTableProps["columns"] = [
   {
     name: "id",
     required: true,
@@ -28,20 +28,46 @@ const columns = [
   {
     name: "editar",
     label: "editar",
+    field:"editar"
   },
   {
     name: "excluir",
     label: "Excluir",
+    field:"excluir"
   },
 ];
 
 const rows = ref([]);
 
 async function axios() {
-  const resul = await configAxios.get("/servico");
-  rows.value = resul.data;
+  try {
+    q.loading.show({
+      spinner: QSpinnerGears
+    })
+    const resul = await configAxios.get("/servico");
+    rows.value = resul.data;
+    q.loading.hide()
+
+  } catch (error) {
+    erroLoading()
+  }
 }
 
+function erroLoading() {
+  q.loading.hide()
+
+  q.notify({
+    message: "Não foi possivel conectar com Sistema!!!",
+    multiLine: true,
+    type: 'negative'
+  })
+}
+
+
+function loadingCreateServico() {
+  toolbar.value = false
+  axios()
+}
 const toolbar = ref(false);
 
 onMounted(() => {
@@ -56,14 +82,7 @@ onMounted(() => {
           <template v-slot:top>
             <h5>Lista de Serviços</h5>
             <q-space />
-            <q-btn
-              class="btn"
-              round
-              color="positive"
-              size="md"
-              icon="add"
-              @click="toolbar = true"
-            />
+            <q-btn class="btn" round color="positive" size="md" icon="add" @click="toolbar = true" />
           </template>
         </q-table>
       </div>
@@ -76,16 +95,14 @@ onMounted(() => {
               <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
             </q-avatar>
 
-            <q-toolbar-title
-              ><span class="text-weight-bold">Serviços</span> Insira os dados
-              para um novos Serviços</q-toolbar-title
-            >
+            <q-toolbar-title><span class="text-weight-bold">Serviços</span> Insira os dados
+              para um novos Serviços</q-toolbar-title>
 
             <q-btn flat round dense icon="close" v-close-popup />
           </q-toolbar>
 
           <q-card-section>
-            <createServicos></createServicos>
+            <createServicos @create-servicos="loadingCreateServico"></createServicos>
           </q-card-section>
         </q-card>
       </q-dialog>
@@ -102,6 +119,7 @@ onMounted(() => {
   margin: 50px auto;
   width: 70%;
 }
+
 .filho div {
   margin-bottom: 20px;
 }

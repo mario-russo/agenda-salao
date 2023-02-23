@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
 
-import { Quasar } from 'quasar'
+import { Quasar, Loading,Notify } from 'quasar'
 
 // Import icon libraries
 import '@quasar/extras/material-icons/material-icons.css'
@@ -30,7 +30,14 @@ import 'quasar/src/css/index.sass'
 const myApp = createApp(App)
 
 myApp.use(Quasar, {
-  plugins: {}, // import Quasar plugins and add here
+  plugins: {
+    Loading,
+    Notify,
+  },
+  config: {
+    loading: { /* look at QuasarConfOptions from the API card */ },
+    notify:{}
+  }// import Quasar plugins and add here
 })
 myApp.use(router)
 // Assumes you have a <div id="app"></div> in your index.html

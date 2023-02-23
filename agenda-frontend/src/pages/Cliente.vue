@@ -4,8 +4,9 @@ import createCliente from "../components/modalInputCliente.vue";
 import { Agendamento } from "../domain/Agendamento";
 
 import configAxios from "../axios/configAxios";
+import { QTableProps, useQuasar } from "quasar";
 
-const columns = [
+const columns: QTableProps['columns'] = [
   {
     name: "nome",
     required: true,
@@ -28,24 +29,49 @@ const columns = [
   {
     name: "editar",
     label: "editar",
+    field: "excluir"
   },
   {
     name: "excluir",
     label: "Excluir",
+    field: "excluir"
   },
 ];
 
 const rows = ref<Agendamento[]>([]);
+const quasar = useQuasar()
 
-async function axios() {
-  const resul = await configAxios.get("/cliente");
-  rows.value = resul.data;
+
+
+function erroLoading() {
+  quasar.loading.hide()
+
+  quasar.notify({
+    message: "Não foi possivel conectar com Sistema!!!",
+    multiLine: true,
+    type: 'negative'
+  })
+}
+
+async function getAllCliente() {
+  try {
+    quasar.loading.show()
+    const resul = await configAxios.get("/cliente");
+    rows.value = resul.data;
+    quasar.loading.hide()
+  } catch (error) {
+    erroLoading()
+  }
+}
+function loadCreateCliente() {
+  toolbar.value = false
+  getAllCliente()
 }
 
 const toolbar = ref(false);
 
 onMounted(() => {
-  axios();
+  getAllCliente();
 });
 </script>
 <template>
@@ -56,14 +82,7 @@ onMounted(() => {
           <template v-slot:top>
             <h5>Lista de Clientes</h5>
             <q-space />
-            <q-btn
-              class="btn"
-              round
-              color="positive"
-              size="md"
-              icon="add"
-              @click="toolbar = true"
-            />
+            <q-btn class="btn" round color="positive" size="md" icon="add" @click="toolbar = true" />
           </template>
         </q-table>
       </div>
@@ -76,16 +95,14 @@ onMounted(() => {
               <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
             </q-avatar>
 
-            <q-toolbar-title
-              ><span class="text-weight-bold">Clientes</span> Insira os dados
-              para um novops Clientes</q-toolbar-title
-            >
+            <q-toolbar-title><span class="text-weight-bold">Clientes</span> Insira os dados
+              para um novops Clientes</q-toolbar-title>
 
             <q-btn flat round dense icon="close" v-close-popup />
           </q-toolbar>
 
           <q-card-section>
-            <createCliente></createCliente>
+            <createCliente @create-cliente="loadCreateCliente()"></createCliente>
           </q-card-section>
         </q-card>
       </q-dialog>
@@ -102,6 +119,7 @@ onMounted(() => {
   margin: 50px auto;
   width: 70%;
 }
+
 .filho div {
   margin-bottom: 20px;
 }
