@@ -1,22 +1,17 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import configAxios from "../axios/configAxios";
-import { Servico } from "../domain/Servico";
+import { Cliente } from "../domain/Cliente";
 
-type agendamento = {
-  cliente?: string;
-  servico?: string;
-  data?: string;
-  hora?: string;
-  atendente?: string;
-  endereco?: string;
-};
 const ph = ref("");
 const dense = ref(true);
-const dados = reactive<Servico>({ nome: "", preco: 0 });
+const dados = reactive<Cliente>({ nome: "", email:'',telefone:'' });
+
+const emits = defineEmits(["createCliente"])
 
 function createServicos() {
   configAxios.post("/cliente", dados);
+  emits("createCliente")
 }
 </script>
 
@@ -76,8 +71,6 @@ function createServicos() {
       </div>
     </div>
   </div>
-
-  {{ dados }}
 </template>
 <style scoped>
 .filho {

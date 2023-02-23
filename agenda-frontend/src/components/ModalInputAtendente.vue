@@ -7,9 +7,10 @@ import { Atendente } from "../domain/Atendente";
 const ph = ref("");
 const dense = ref(true);
 const dados = reactive<Atendente>({ nome: "", email:'',senha:''});
-
+const emits = defineEmits(["createAtendente"])
 function createAtendente() {
   configAxios.post("/atendente", dados);
+  emits("createAtendente")
 }
 </script>
 
