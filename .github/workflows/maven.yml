@@ -52,40 +52,44 @@ jobs:
     needs: frontend
     runs-on: ubuntu-latest
     steps:
-    - name: Build backend
-      uses: docker/build-push-action@v2
-      with:
-        context: ./agenda-backend
-        push: false
-        tags: mariorusso/agenda-backend:latest
-        
-    - name: Build and push backend Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: ./agenda-backend
-        push: true
-        tags: mariorusso/agenda-backend:latest
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: mariorusso/agenda-backend:latest
         
   build-deploy-frontend:
-    needs:  build-deploy-backend
+    needs: build-deploy-backend
     runs-on: ubuntu-latest
     steps:
-    - name: Build frontend
-      uses: docker/build-push-action@v2
-      with:
-        context: ./agenda-frontend
-        push: false
-        tags: mariorusso/agenda-frontend:latest
-        
-    - name: Build and push frontend Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: ./agenda-frontend
-        push: true
-        tags: mariorusso/agenda-frontend:latest
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: mariorusso/agenda-frontend:latest
