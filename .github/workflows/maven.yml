@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Full Build and Test
 
 on:
   push:
@@ -15,8 +15,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  backend:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,3 +28,19 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: cd agenda-backend && mvn package
+      
+      
+  frontend:
+    needs: backend
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14.x'
+    - name: Install dependencies
+      run: npm install
+    - name: Build and Test
+      run: |
+        npm run build
