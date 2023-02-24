@@ -55,21 +55,26 @@ jobs:
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
+        with:
+          context: "{{defaultContext}}:agenda-backend"
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+        with:
+          context: "{{defaultContext}}:agenda-backend"
        
       -
         name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
+          context: "{{defaultContext}}:agenda-backend"
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       -
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: ./agenda-backend
+          context: "{{defaultContext}}:agenda-backend"
           push: true
           tags: mariorusso/agenda-backend:latest
         
@@ -95,6 +100,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: ./agenda-frontend
+          context: "{{defaultContext}}:agenda-frontend"
           push: true
           tags: mariorusso/agenda-frontend:latest
