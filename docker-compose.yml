@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: agenda
+      POSTGRES_USER: agenda
+      POSTGRES_DB: agenda
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+  backend:
+    build:
+      context: ./agenda-backend
+      dockerfile: Dockerfile
+    environment:
+      BD_PASSWORD: agenda
+      BD_USERNAME: agenda
+      DB_URL: db
+      DB_BASE: agenda
+      PROFILE_PROD: dev
+    ports:
+      - "8080:8080"
+    networks:
+      - my-network
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./agenda-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    networks:
+      - my-network
+    depends_on:
+      - backend
+
+volumes:
+  db-data:
+
+networks:
+  my-network:

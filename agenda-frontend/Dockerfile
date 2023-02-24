@@ -1,26 +1,12 @@
-FROM node:lts-alpine as builder
-
+FROM node:14-alpine AS builder
 WORKDIR /app
-
-COPY package.json .
-COPY package-lock.json .
-
+COPY package*.json ./
 RUN npm install
-RUN npm install -g serve
-# Bundle app source
-COPY . ./
+COPY . .
+RUN npm run build
 
-RUN chown -R node:node /app/node_modules
-
-# start app
-CMD ["npm", "run", "build"]
-
-
-FROM nginx:1.15.2-alpine
-
-COPY --from=builder /app/dist /var/www
-COPY nginx.conf /etc/nginx/nginx.conf
-
-EXPOSE 3000
-
-ENTRYPOINT ["nginx","-g","daemon off;"]
+FROM nginx:alpine
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=builder /app/dist /usr/share/nginx/html
+# COPY nginx.conf /etc/nginx/nginx.conf
+CMD ["nginx", "-g", "daemon off;"]
