@@ -40,7 +40,9 @@ jobs:
       with:
         node-version: '14.x'
     - name: Install dependencies
+      working-directory: ./agenda-frontend
       run: npm install
     - name: Build and Test
+      working-directory: ./agenda-frontend
       run: |
         npm run build
