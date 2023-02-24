@@ -5,13 +5,13 @@ import { Cliente } from "../domain/Cliente";
 
 const ph = ref("");
 const dense = ref(true);
-const dados = reactive<Cliente>({ nome: "", email:'',telefone:'' });
+const dados = reactive<Cliente>({ nome: "", email: '', telefone: '' });
 
-const emits = defineEmits(["createCliente"])
+const emit = defineEmits(["createCliente"])
 
 function createServicos() {
   configAxios.post("/cliente", dados);
-  emits("createCliente")
+  emit("createCliente")
 }
 </script>
 
@@ -19,39 +19,22 @@ function createServicos() {
   <div class="filho">
     <div>
       <div>
-        <q-input
-          v-model="dados.nome"
-          size="lg"
-          class="input"
-          label="NOME"
-          placeholder="Insira o Nome do Cliente"
-          :dense="dense"
-        >
-          <template v-slot:prepend> <i class="fa-regular fa-user"></i></template
-        ></q-input>
+        <q-input v-model="dados.nome" size="lg" class="input" label="NOME" placeholder="Insira o Nome do Cliente"
+          :dense="dense">
+          <template v-slot:prepend> <i class="fa-regular fa-user"></i></template></q-input>
       </div>
 
       <div>
-        <q-input
-          v-model="dados.email"
-          class="input"
-          label="E-mail"
-          placeholder="Insira um o nome do Cliente"
-          :dense="dense"
-        >
+        <q-input v-model="dados.email" class="input" label="E-mail" placeholder="Insira um o nome do Cliente"
+          :dense="dense">
           <template v-slot:prepend>
             <i class="fa-solid fa-business-time"></i>
           </template>
         </q-input>
       </div>
       <div>
-        <q-input
-          v-model="dados.telefone"
-          class="input"
-          label="Telefone"
-          placeholder="Insira um o nome do Telefone"
-          :dense="dense"
-        >
+        <q-input v-model="dados.telefone" class="input" label="Telefone" placeholder="Insira um o nome do Telefone"
+          :dense="dense">
           <template v-slot:prepend>
             <i class="fa-solid fa-business-time"></i>
           </template>
@@ -61,12 +44,7 @@ function createServicos() {
       <div>
         <q-btn-group spread>
           <q-btn color="purple" label="" icon="cancel" />
-          <q-btn
-            color="purple"
-            label=""
-            icon="send"
-            @click="createServicos()"
-          />
+          <q-btn color="purple" label="" icon="send" @click="createServicos()" />
         </q-btn-group>
       </div>
     </div>
@@ -76,6 +54,7 @@ function createServicos() {
 .filho {
   width: 90%;
 }
+
 .filho div {
   margin-bottom: 20px;
 }

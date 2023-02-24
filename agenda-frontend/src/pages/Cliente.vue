@@ -4,7 +4,7 @@ import createCliente from "../components/modalInputCliente.vue";
 import { Agendamento } from "../domain/Agendamento";
 
 import configAxios from "../axios/configAxios";
-import { QTableProps, useQuasar } from "quasar";
+import { QSpinnerGears, QTableProps, useQuasar } from "quasar";
 
 const columns: QTableProps['columns'] = [
   {
@@ -42,7 +42,20 @@ const rows = ref<Agendamento[]>([]);
 const quasar = useQuasar()
 
 
+async function getAllCliente() {
+  try {
+    quasar.loading.show({
+      spinner: QSpinnerGears
+    })
+    quasar.loading.show()
+    const resul = await configAxios.get("/cliente");
+    rows.value = resul.data;
+    quasar.loading.hide()
 
+  } catch (error) {
+    erroLoading()
+  }
+}
 function erroLoading() {
   quasar.loading.hide()
 
@@ -53,16 +66,6 @@ function erroLoading() {
   })
 }
 
-async function getAllCliente() {
-  try {
-    quasar.loading.show()
-    const resul = await configAxios.get("/cliente");
-    rows.value = resul.data;
-    quasar.loading.hide()
-  } catch (error) {
-    erroLoading()
-  }
-}
 function loadCreateCliente() {
   toolbar.value = false
   getAllCliente()
@@ -102,7 +105,7 @@ onMounted(() => {
           </q-toolbar>
 
           <q-card-section>
-            <createCliente @create-cliente="loadCreateCliente()"></createCliente>
+            <createCliente @create-cliente="loadCreateCliente"></createCliente>
           </q-card-section>
         </q-card>
       </q-dialog>
