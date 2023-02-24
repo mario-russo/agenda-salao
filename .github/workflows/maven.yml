@@ -47,3 +47,45 @@ jobs:
       working-directory: ./agenda-frontend
       run: |
         npm run build
+        
+  build-deploy-backend:
+    needs: frontend
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build backend
+      uses: docker/build-push-action@v2
+      with:
+        context: ./agenda-backend
+        push: false
+        tags: mariorusso/agenda-backend:latest
+        
+    - name: Build and push backend Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: ./agenda-backend
+        push: true
+        tags: mariorusso/agenda-backend:latest
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        
+  build-deploy-frontend:
+    needs:  build-deploy-backend
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build frontend
+      uses: docker/build-push-action@v2
+      with:
+        context: ./agenda-frontend
+        push: false
+        tags: mariorusso/agenda-frontend:latest
+        
+    - name: Build and push frontend Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: ./agenda-frontend
+        push: true
+        tags: mariorusso/agenda-frontend:latest
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
