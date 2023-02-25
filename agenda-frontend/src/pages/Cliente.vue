@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
 import createCliente from "../components/modalInputCliente.vue";
-import { Agendamento } from "../domain/Agendamento";
+import {listAllCliente} from "../axios/services/ClienteService"
 
-import configAxios from "../axios/configAxios";
 import { QSpinnerGears, QTableProps, useQuasar } from "quasar";
+import { Cliente } from "../domain/Cliente";
 
 const columns: QTableProps['columns'] = [
   {
@@ -38,7 +38,7 @@ const columns: QTableProps['columns'] = [
   },
 ];
 
-const rows = ref<Agendamento[]>([]);
+const rows = ref<Cliente[]>([]);
 const quasar = useQuasar()
 
 
@@ -48,8 +48,8 @@ async function getAllCliente() {
       spinner: QSpinnerGears
     })
     quasar.loading.show()
-    const resul = await configAxios.get("/cliente");
-    rows.value = resul.data;
+    const resul = await listAllCliente()
+    rows.value = resul
     quasar.loading.hide()
 
   } catch (error) {
