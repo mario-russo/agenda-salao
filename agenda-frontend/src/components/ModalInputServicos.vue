@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import configAxios from "../axios/configAxios";
 import { Servico } from "../domain/Servico";
+import {createServico} from "../axios/services/ServicoService"
 
 const ph = ref("");
 const dense = ref(true);
@@ -9,8 +9,8 @@ const dados = reactive<Servico>({ nome: "", preco: 0 });
 
 const emit = defineEmits(['createServicos',])
 
-async function createServicos() {
-  await configAxios.post("/servico", dados);
+async function salveServicos() {
+  await createServico(dados)
   emit("createServicos")
 
 }
@@ -37,7 +37,7 @@ async function createServicos() {
       <div>
         <q-btn-group spread>
           <q-btn color="purple" label="" icon="cancel" />
-          <q-btn color="purple" label="" icon="send" @click="createServicos()" />
+          <q-btn color="purple" label="" icon="send" @click="salveServicos()" />
         </q-btn-group>
       </div>
     </div>

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import createServicos from "../components/ModalInputServicos.vue";
 import { QSpinnerGears, QTableProps, useQuasar } from "quasar"
 
-import configAxios from "../axios/configAxios";
+import inputServico from "../components/ModalInputServicos.vue";
+import {listAllServico} from "../axios/services/ServicoService"
 import { Servico } from "../domain/Servico";
+
+
 const q = useQuasar()
 const columns:QTableProps["columns"] = [
   {
@@ -37,15 +39,15 @@ const columns:QTableProps["columns"] = [
   },
 ];
 
-const rows = ref([]);
+const rows = ref<Servico[]>([]);
 
-async function axios() {
+async function getAllServicos() {
   try {
     q.loading.show({
       spinner: QSpinnerGears
     })
-    const resul = await configAxios.get("/servico");
-    rows.value = resul.data;
+    const resul = await listAllServico()
+    rows.value = resul
     q.loading.hide()
 
   } catch (error) {
@@ -66,12 +68,12 @@ function erroLoading() {
 
 function loadingCreateServico() {
   toolbar.value = false
-  axios()
+  getAllServicos()
 }
 const toolbar = ref(false);
 
 onMounted(() => {
-  axios();
+  getAllServicos();
 });
 </script>
 <template>
@@ -102,7 +104,7 @@ onMounted(() => {
           </q-toolbar>
 
           <q-card-section>
-            <createServicos @create-servicos="loadingCreateServico"></createServicos>
+            <inputServico @create-servicos="loadingCreateServico"></inputServico>
           </q-card-section>
         </q-card>
       </q-dialog>
