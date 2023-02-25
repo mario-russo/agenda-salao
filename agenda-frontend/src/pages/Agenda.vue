@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import createAgendamento from "../components/ModalInputAgendamento.vue";
+import inputAgendamento from "../components/ModalInputAgendamento.vue";
 import { Agendamento } from "../domain/Agendamento"
+import{listAllAgendamento}from "../axios/services/AgendamentoService"
 
-import configAxios from "../axios/configAxios"
 import { QTableProps, QTabPanelProps, useQuasar } from "quasar";
 const quasar = useQuasar()
 
@@ -53,8 +53,8 @@ const rows = ref<Agendamento[]>([]);
 async function getAllAgendamento() {
   try {
     quasar.loading.show()
-    const resul = await configAxios.get("/agendamento")
-    rows.value = resul.data
+    const resul = await listAllAgendamento()
+    rows.value = resul
     quasar.loading.hide()
   } catch (error) {
     ErroLoading()
@@ -106,7 +106,7 @@ onMounted(() => {
           </q-toolbar>
 
           <q-card-section>
-            <createAgendamento @create-agendamento="loadingAgendamento()"></createAgendamento>
+            <inputAgendamento @create-agendamento="loadingAgendamento()"></inputAgendamento>
           </q-card-section>
         </q-card>
       </q-dialog>
