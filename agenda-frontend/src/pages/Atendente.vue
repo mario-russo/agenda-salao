@@ -2,8 +2,8 @@
 import { ref, reactive, onMounted } from "vue";
 import inputAtendente from "../components/ModalInputAtendente.vue";
 import { QTableProps, useQuasar } from "quasar"
-import configAxios from "../axios/configAxios"
 import { Atendente } from "../domain/Atendente";
+import {listAllAtendente} from "../axios/services/AtendeteService"
 
 const columns: QTableProps['columns'] = [
   {
@@ -37,11 +37,12 @@ const columns: QTableProps['columns'] = [
 
 const rows = ref<Atendente[]>([]);
 const quasar = useQuasar()
+
 async function getAllAtendente() {
   try {
     quasar.loading.show()
-    const resul = await configAxios.get("/atendente")
-    rows.value = resul.data
+    const resul = await listAllAtendente()
+    rows.value = resul
     quasar.loading.hide()
 
   } catch (error) {
