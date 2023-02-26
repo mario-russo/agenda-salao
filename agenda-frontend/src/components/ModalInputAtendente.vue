@@ -22,6 +22,7 @@ function salveAtendente() {
       <div>
         <q-input
           v-model="dados.nome"
+          outlined 
           size="lg"
           class="input"
           label="Nome"
@@ -35,6 +36,7 @@ function salveAtendente() {
       <div>
         <q-input
           v-model="dados.email"
+          outlined
           class="input"
           label="email"
           type="email"
@@ -42,13 +44,14 @@ function salveAtendente() {
           :dense="dense"
         >
           <template v-slot:prepend>
-            <i class="fa-solid fa-business-time"></i>
+            <i class="fa-solid fa-envelope"></i>
           </template>
         </q-input>
       </div>
       <div>
         <q-input
           v-model="dados.senha"
+          outlined
           class="input"
           label="senha"
           type="password"
@@ -56,7 +59,7 @@ function salveAtendente() {
           :dense="dense"
         >
           <template v-slot:prepend>
-            <i class="fa-solid fa-password-time"></i>
+            <i class="fa-solid fa-lock"></i>
           </template>
         </q-input>
       </div>
@@ -76,10 +79,7 @@ function salveAtendente() {
   </div>
   </template>
 <style scoped>
-.filho {
-  width: 90%;
-}
-.filho div {
+ div {
   margin-bottom: 20px;
 }
 </style>
