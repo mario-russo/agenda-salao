@@ -22,15 +22,9 @@ const columns: QTableProps['columns'] = [
 
   },
   {
-    name: "editar",
-    label: "editar",
-    field: 'excluir'
-
-  },
-  {
-    name: "excluir",
-    label: "Excluir",
-    field: "excluir"
+    name: "actions",
+    label: "Ações",
+    field: 'actions'
 
   },
 ];
@@ -79,19 +73,24 @@ onMounted(() => {
             <q-space />
             <q-btn class="btn" round color="positive" size="md" icon="add" @click="toolbar = true" />
           </template>
+          <template v-slot:body-cell-actions="props">
+            <q-td :props="props">
+              <q-btn icon="edit" color="info" size="sm" class="q-mr-sm" />
+              <q-btn icon="delete" color="negative" size="sm" />
+            </q-td>
+          </template>
         </q-table>
       </div>
     </div>
     <div>
-      <q-dialog full-height v-model="toolbar">
+      <q-dialog  v-model="toolbar">
         <q-card style="width: 1000px; max-width: 80vw;">
           <q-toolbar>
             <q-avatar>
               <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
             </q-avatar>
 
-            <q-toolbar-title><span class="text-weight-bold">Atendente</span>
-              Insira os dados para um novo Atendente</q-toolbar-title>
+            <q-toolbar-title><span class="text-weight-bold">Novo</span> - Atendente</q-toolbar-title>
 
             <q-btn flat round dense icon="close" v-close-popup />
           </q-toolbar>
@@ -105,17 +104,7 @@ onMounted(() => {
   </div>
 </template>
 <style scoped>
-.container {
-  width: 100%;
-  height: auto - 100px;
-}
-
-.filho {
-  margin: 50px auto;
-  width: 70%;
-}
-
-.filho div {
+ div {
   margin-bottom: 20px;
 }
 </style>

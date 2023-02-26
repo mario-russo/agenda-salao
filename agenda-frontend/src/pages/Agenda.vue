@@ -36,16 +36,13 @@ const columns: QTableProps["columns"] = [
 
   },
   {
-    name: "editar",
-    label: "editar",
-    field: "editar"
+    name: "actions",
+    label: "Ações",
+    field: "actions",
+    align:"right"
 
   },
-  {
-    name: "excluir",
-    label: "Excluir",
-    field:"editar"
-  },
+ 
 ];
 
 const rows = ref<Agendamento[]>([]);
@@ -79,8 +76,6 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div class="container">
-    <div class="filho">
       <div>
         <q-table :rows="rows" :columns="columns" row-key="name" color="amber">
           <template v-slot:top>
@@ -88,10 +83,14 @@ onMounted(() => {
             <q-space />
             <q-btn class="btn" round color="positive" size="md" icon="add" @click="toolbar = true" />
           </template>
+          <template v-slot:body-cell="props">
+            <q-td :props="props">
+              <q-btn icon="remove" :dense="true" />
+            </q-td>
+          </template>
         </q-table>
       </div>
-    </div>
-    <div>
+   
       <q-dialog full-height v-model="toolbar">
         <q-card style="width: 1000px; max-width: 80vw;">
           <q-toolbar>
@@ -110,21 +109,10 @@ onMounted(() => {
           </q-card-section>
         </q-card>
       </q-dialog>
-    </div>
-  </div>
+   
 </template>
 <style scoped>
-.container {
-  width: 100%;
-  height: auto - 100px;
-}
-
-.filho {
-  margin: 50px auto;
-  width: 70%;
-}
-
-.filho div {
+div {
   margin-bottom: 20px;
 }
 </style>
