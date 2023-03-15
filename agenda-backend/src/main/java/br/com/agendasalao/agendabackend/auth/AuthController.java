@@ -3,7 +3,7 @@ package br.com.agendasalao.agendabackend.auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,16 +21,16 @@ public class AuthController {
     @Autowired
     private TokenService tokenService;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public String login(@RequestBody LoginDto loginDto) {
-       UsernamePasswordAuthenticationToken authenticationToken =  new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getSenha());
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                loginDto.getEmail(), loginDto.getSenha());
 
-       var  authentication = this.authenticationManager.authenticate(authenticationToken);
+        var authentication = this.authenticationManager.authenticate(authenticationToken);
 
-       var usuario = (AtendenteEntity) authentication.getPrincipal();
-        
+        var usuario = (AtendenteEntity) authentication.getPrincipal();
 
-       return tokenService.gerarToken(usuario);
-        
+        return tokenService.gerarToken(usuario);
+
     }
 }

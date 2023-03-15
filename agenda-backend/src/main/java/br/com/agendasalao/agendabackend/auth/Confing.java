@@ -20,9 +20,9 @@ public class Confing {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeHttpRequests(
                         authorize -> authorize
-                                .requestMatchers("/auth/**", "/atendente").permitAll()                                
-                                .anyRequest().authenticated()
-                ).build();
+                                .requestMatchers("/auth/**", "/atendente").permitAll()
+                                .anyRequest().authenticated())
+                .build();
 
     }
 
