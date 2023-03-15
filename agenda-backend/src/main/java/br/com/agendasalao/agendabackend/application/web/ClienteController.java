@@ -19,22 +19,25 @@ public class ClienteController {
     public ClienteController(ClienteSevice service) {
         this.service = service;
     }
-    
+
     @PostMapping
-    public String create(@RequestBody Cliente cliente){
+    public String create(@RequestBody Cliente cliente) {
         var resul = service.salvaCliente(cliente);
 
-        if(resul == null) return "ERRO AO SALVAR O CLIENTE";
+        if (resul == null)
+            return "ERRO AO SALVAR O CLIENTE";
 
         return resul;
 
-    } 
+    }
+
     @GetMapping
-    public List<Cliente> listAll(){
+    public List<Cliente> listAll() {
         return service.buscaTodosClientes();
     }
+
     @GetMapping("/{id}")
-    public Cliente getById(long id){
+    public Cliente getById(long id) {
         return null;
     }
 }

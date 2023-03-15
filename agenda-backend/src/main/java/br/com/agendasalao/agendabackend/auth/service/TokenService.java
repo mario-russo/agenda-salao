@@ -15,13 +15,19 @@ public class TokenService {
 
     public String gerarToken(AtendenteEntity usuario) {
         return JWT.create()
-            .withIssuer("Ptendente")
-            .withSubject(usuario.getEmail())
-            .withClaim("id", usuario.getId())
-            .withExpiresAt( LocalDateTime.now()
-                            .plusMinutes(60)
-                            .toInstant(ZoneOffset.of("-03:00"))
-            ).sign(Algorithm.HMAC256("atentende"));
+                .withIssuer("atendente")
+                .withSubject(usuario.getEmail())
+                .withClaim("id", usuario.getId())
+                .withExpiresAt(LocalDateTime.now()
+                        .plusMinutes(60)
+                        .toInstant(ZoneOffset.of("-03:00")))
+                .sign(Algorithm.HMAC256("atendente"));
+    }
+
+    public String getSubject(String token) {
+        return JWT.require(Algorithm.HMAC256("atendente"))
+                .withIssuer("atendente")
+                .build().verify(token).getSubject();
     }
 
 }
