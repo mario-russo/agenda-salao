@@ -2,11 +2,18 @@ package br.com.agendasalao.agendabackend.infra.adaptadores.entidades;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import br.com.agendasalao.agendabackend.dominio.model.Atendente;
 
 @Entity
 @Table(name = "atendente")
-public class AtendenteEntity {
+public class AtendenteEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,11 +26,9 @@ public class AtendenteEntity {
         this.email = atendente.getEmail();
         this.senha = atendente.getSenha();
     }
-    
 
     public AtendenteEntity() {
     }
-
 
     public Long getId() {
         return id;
@@ -52,6 +57,41 @@ public class AtendenteEntity {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_ATENDENTE"));
+    }
+
+    @Override
+    public String getPassword() {
+        return getSenha();
+    }
+
+    @Override
+    public String getUsername() {
+        return getEmail();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 }
