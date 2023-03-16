@@ -25,6 +25,7 @@ public class AgendamentoController {
     public List<Agendamento> getAll(){
         return service.buscaTodosAgendamentos();
     }
+    
     @PostMapping
     public String create (@RequestBody Agendamento agendamento){
         var result  = service.salvarAgendamento(agendamento);
