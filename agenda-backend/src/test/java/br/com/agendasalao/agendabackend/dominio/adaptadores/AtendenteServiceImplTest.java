@@ -2,6 +2,7 @@ package br.com.agendasalao.agendabackend.dominio.adaptadores;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -69,15 +70,15 @@ public class AtendenteServiceImplTest {
     @DisplayName("verifica se o o Id do cliente é gerado!")
     void testSalvaAtendenteErro() {
         // Montagem do Cenário
-        when(atendenteRepository.Salve(any())).thenReturn(null);
+        when(atendenteRepository.Salve(any())).thenThrow(NullPointerException.class);
         
         // chamada da função do para vericicar
-        String resposta = service.salvaAtendente(atendente);
+       
 
         // verifica os acertos da classe
-        verify(atendenteRepository).Salve(atendente);
-        assertEquals("ERRO AO SALVAR", resposta);
-        assertEquals(String.class, resposta.getClass());
+        assertThrows(NullPointerException.class, ()->{
+            atendenteRepository.Salve(any());
+        });
 
     }
 

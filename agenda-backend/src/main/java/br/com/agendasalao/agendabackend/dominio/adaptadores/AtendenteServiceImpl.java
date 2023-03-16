@@ -23,7 +23,7 @@ public class AtendenteServiceImpl implements AtendenteService {
         atendente.setSenha(crypt().encode(atendente.getSenha()));
         var atendenteSalvo = atendenteRepository.Salve(atendente);
         if (Objects.isNull(atendenteSalvo))
-            return "ERRO AO SALVAR";
+            new NullPointerException("erro ao salvar");
         return "ATENDENTE SALVO COM SUCESSO";
     }
 
